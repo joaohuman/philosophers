@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 02:14:55 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/03/22 23:53:43 by jvictor-         ###   ########.fr       */
+/*   Created: 2023/03/22 23:58:02 by jvictor-          #+#    #+#             */
+/*   Updated: 2023/03/22 23:58:58 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef PHILO_H
+# define PHILO_H
 
-int	main(int argc, char **argv)
-{
-	if (argc != 5 && argc != 6)
-		return (printf("ArgCounter diferente de 5 e 6\n"), 1);
-	return (0);
-}
+# include <stdio.h>
+# include <pthread.h>
+
+#endif

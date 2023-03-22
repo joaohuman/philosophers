@@ -6,7 +6,7 @@
 #    By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/22 23:49:45 by jvictor-          #+#    #+#              #
-#    Updated: 2023/03/22 23:52:40 by jvictor-         ###   ########.fr        #
+#    Updated: 2023/03/23 00:03:59 by jvictor-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ clean:
 		$(RM) $(OBJ) 
 
 fclean: clean
-		$(RM) $(LIBFT)
 		$(RM) $(NAME)
 
 re: fclean all
