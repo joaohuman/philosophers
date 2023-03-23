@@ -6,13 +6,13 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 02:14:55 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/03/23 01:03:16 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/03/23 01:56:34 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void print_how_use(void)
+void	print_how_use(void)
 {
 	printf("\nuse: ");
 	printf("philo ");
@@ -56,9 +56,23 @@ int	check_args(int argc, char **argv)
 	return (SUCCESS);
 }
 
+void	init_param(t_param *p, int argc, char **argv)
+{
+	p->num_philo = ft_atoi(argv[1]);
+	p->time_to_die = ft_atoi(argv[2]);
+	p->time_to_eat = ft_atoi(argv[3]);
+	p->time_to_sleep = ft_atoi(argv[4]);
+	p->how_much_eat = 0;
+	if (argc == 6)
+		p->how_much_eat = ft_atoi(argv[5]);
+}
+
 int	main(int argc, char **argv)
 {
-	check_args(argc, argv);
-	//init_param(&param, argc, argv);
+	t_param	p;
+
+	if (check_args(argc, argv))
+		return (ERROR);
+	init_param(&p, argc, argv);
 	return (SUCCESS);
 }
