@@ -6,16 +6,16 @@
 #    By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/22 23:49:45 by jvictor-          #+#    #+#              #
-#    Updated: 2023/03/23 00:03:59 by jvictor-         ###   ########.fr        #
+#    Updated: 2023/03/23 00:31:32 by jvictor-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-CC = gcc 
+CC = gcc
 FLAGS = -pthread -Wall -Werror -Wextra
 RM = rm -f
 
-SRC = main.c
+SRC = main.c utils_libft.c
 
 OBJ = $(SRC:.c=.o)
 
