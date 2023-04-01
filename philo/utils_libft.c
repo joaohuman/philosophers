@@ -19,25 +19,23 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+long long	ft_atoi(const char *str)
 {
-	int	sig;
-	int	res;
+	long long unsigned	num;
 
-	sig = 1;
-	res = 0;
-	while ((*str >= '\t' && *str <= '\r') || *str == ' ')
+	num = 0;
+	while ((*str == ' ') || (*str >= 9 && *str <= 13))
 		str++;
-	if (*str == '+' || *str == '-')
+	if (*str == '+')
+		str++;
+	while (*str >= '0' && *str <= '9')
 	{
-		if (*str == '-')
-			sig *= -1;
+		num = num * 10 + *str - '0';
 		str++;
 	}
-	while (ft_isdigit((int)*str))
-	{
-		res = (res * 10) + (*str - '0');
+	while ((*str == ' ') || (*str >= 9 && *str <= 13))
 		str++;
-	}
-	return (res * sig);
+	if (*str)
+		return (-1);
+	return (num);
 }
