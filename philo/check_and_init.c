@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 02:01:02 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/05 02:05:49 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/05 03:14:17 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	init_philo(t_param *p)
 		p->philo[i].last_eat = 0;
 		p->philo[i].death = 0;
 		p->philo[i].num_eat = 0;
+		pthread_mutex_init(&p->philo[i].fork, NULL);
 		p->philo[i].param = p;
 		i++;
 	}

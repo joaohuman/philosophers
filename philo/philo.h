@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 23:58:02 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/05 02:08:37 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/05 04:03:06 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ struct s_philo
 	long long		last_eat;
 	int				death;
 	int				num_eat;
-	pthread_mutex_t	lock;
+	pthread_mutex_t	fork;
+	int				i;
 	t_param			*param;
 };
 
