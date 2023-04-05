@@ -6,7 +6,7 @@
 #    By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/22 23:49:45 by jvictor-          #+#    #+#              #
-#    Updated: 2023/03/23 00:31:32 by jvictor-         ###   ########.fr        #
+#    Updated: 2023/04/05 02:08:14 by jvictor-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = gcc
 FLAGS = -pthread -Wall -Werror -Wextra
 RM = rm -f
 
-SRC = main.c utils_libft.c
+SRC = main.c utils_libft.c check_and_init.c
 
 OBJ = $(SRC:.c=.o)
 
