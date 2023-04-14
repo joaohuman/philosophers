@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 02:01:02 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/05 03:14:17 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/14 02:54:06 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	check_is_int(char **str)
 	return (SUCCESS);
 }
 
-void	init_param(t_param *p, int argc, char **argv)
+int	init_param(t_param *p, int argc, char **argv)
 {
 	p->num_philo = ft_atoi(argv[1]);
 	p->time_to_die = ft_atoi(argv[2]);
@@ -70,9 +70,12 @@ void	init_param(t_param *p, int argc, char **argv)
 	if (argc == 6)
 		p->how_much_eat = ft_atoi(argv[5]);
 	p->philo = malloc(sizeof(t_philo) * p->num_philo);
+	if (p->philo == NULL)
+		return (ERROR);
+	return (SUCCESS);
 }
 
-void	init_philo(t_param *p)
+int	init_philo(t_param *p)
 {
 	int	i;
 
@@ -84,10 +87,12 @@ void	init_philo(t_param *p)
 		p->philo[i].last_eat = 0;
 		p->philo[i].death = 0;
 		p->philo[i].num_eat = 0;
-		pthread_mutex_init(&p->philo[i].fork, NULL);
+		if (pthread_mutex_init(&p->philo[i].fork, NULL))
+			return (ERROR);
 		p->philo[i].param = p;
 		i++;
 	}
+	return (SUCCESS);
 }
 
 long long	get_time(void)

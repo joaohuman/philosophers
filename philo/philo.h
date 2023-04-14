@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 23:58:02 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/05 04:03:06 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/14 02:33:15 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int			ft_isdigit(int c);
 void		print_how_use(void);
 int			check_args(int argc, char **argv);
 int			check_is_int(char **str);
-void		init_param(t_param *p, int argc, char **argv);
-void		init_philo(t_param *p);
+int			init_param(t_param *p, int argc, char **argv);
+int			init_philo(t_param *p);
 long long	get_time(void);
 
 #endif

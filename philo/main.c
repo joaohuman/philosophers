@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 02:14:55 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/05 04:26:00 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/14 02:59:59 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,51 +35,76 @@ void	print_how_use(void)
 
 void	*test_philo(void *philo)
 {
-	t_philo *phi;
-	int		i;
+	pthread_mutex_t *phi_nxt;
+	t_philo 		*phi;
+	int				phi_nxt_id;
+	int				i;
+	long long		time;
 
 	phi = (t_philo *)philo;
 	i = phi->i;
-
+	if (i % 2 == 0)
+		usleep(1000);
+	if (i != phi->param->num_philo - 1)
+	{
+		phi_nxt = &phi->param->philo[i+1].fork;
+		phi_nxt_id = phi->param->philo[i+1].phi_id;
+	}
+	else
+	{
+		phi_nxt = &phi->param->philo[0].fork;
+		phi_nxt_id = phi->param->philo[0].phi_id;
+	}
+	time = get_time() - phi->param->init_time;
 	//preciso pegar "&phi->param->philo[i+1].fork" e colocar em uma variavel
 	// lembrando que esse i+1 pode dar problema, entao antes verificar
 	// para que o ultimo nao tente acessar memoria que nao deve
 	// ele precisa entao retornar para o primeiro garfo
 	
 	pthread_mutex_lock(&phi->fork);
-	printf("filosofo %i has taken a fork\n", phi->phi_id);
-	pthread_mutex_lock(&phi->param->philo[i+1].fork);
-	printf("filosofo %i has taken a 2 fork\n", phi->phi_id);
-	pthread_mutex_unlock(&phi->param->philo[i+1].fork);
-	printf("filosofo %i has released a 2 fork\n", phi->phi_id);
+	printf("\033[1;39m{%06lli\033[0;39m} - filosofo %i has taken a fork\n", time, phi->phi_id);
+	pthread_mutex_lock(phi_nxt);
+	printf("\033[1;39m{%06lli\033[0;39m} - filosofo %i has taken a %i fork\n", time, phi->phi_id, phi_nxt_id);
+	pthread_mutex_unlock(phi_nxt);
+	printf("\033[1;39m{%06lli\033[0;39m} - filosofo %i has released a %i fork\n", time, phi->phi_id, phi_nxt_id);
 	pthread_mutex_unlock(&phi->fork);
-	printf("filosofo %i has released a fork\n", phi->phi_id);
+	printf("\033[1;39m{%06lli\033[0;39m} - filosofo %i has released a fork\n", time, phi->phi_id);
 	return(NULL);
+}
+
+int	give_life_to_philo(t_param *p)
+{
+	int i;
+
+	i = 0;
+	while (i < p->num_philo)
+	{
+		p->philo[i].i = i;
+		if (pthread_create(&p->philo[i].phi_thread, NULL, test_philo, &p->philo[i]))
+			return (printf("Error creating thread\n"), ERROR);
+		i++;
+	}
+	i = 0;
+	while (i < p->num_philo)
+	{
+		if (pthread_join(p->philo[i].phi_thread, NULL))
+			return (printf("Error joining thread\n"), ERROR);
+		i++;
+	}
+	free(p->philo);
+	return (SUCCESS);
 }
 
 int	main(int argc, char **argv)
 {
 	t_param	p;
-	int		i;
-	
-	i = 0;
 	if (check_args(argc, argv))
 		return (ERROR);
-	init_param(&p, argc, argv);
-	init_philo(&p);
-	while (i < p.num_philo)
-	{
-		p.philo[i].i = i;
-		if(pthread_create(&p.philo[i].phi_thread, NULL, test_philo, &p.philo[i]))
-			return(printf("Error creating thread"), ERROR);
-		i++;
-	}
-	i = 0;
-	while (i < p.num_philo)
-	{
-		pthread_join(p.philo[i].phi_thread, NULL);
-		i++;
-	}
-	free(p.philo);
+	if (init_param(&p, argc, argv))
+		return(printf("Error init_param"), ERROR);
+	if (init_philo(&p))
+		return(printf("Error init_philo"), ERROR);
+	if (give_life_to_philo(&p))
+		return(printf("Error give_life_to_philo"), ERROR);
 	return (SUCCESS);
 }
