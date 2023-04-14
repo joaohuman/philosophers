@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 23:58:02 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/14 02:33:15 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/14 03:47:48 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,9 @@ int			check_is_int(char **str);
 int			init_param(t_param *p, int argc, char **argv);
 int			init_philo(t_param *p);
 long long	get_time(void);
+
+void	*test_philo(void *philo);
+int	give_life_to_philo(t_param *p);
+
 
 #endif
