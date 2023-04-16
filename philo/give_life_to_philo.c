@@ -6,11 +6,21 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 03:46:32 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/16 19:08:56 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/16 14:47:56 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int    ft_usleep(unsigned long ms)
+{
+    unsigned long    start;
+
+    start = get_time();
+    while (ms > get_time() - start)
+        usleep(100);
+    return (0);
+}
 
 void	*test_philo(void *philo)
 {
@@ -31,11 +41,13 @@ void	*test_philo(void *philo)
 	pthread_mutex_lock(&phi->last_eat_mtx);
 	phi->last_eat = get_time() - phi->param->init_time;
 	pthread_mutex_unlock(&phi->last_eat_mtx);
-	usleep(phi->param->time_to_eat * 1000);
+	// usleep(phi->param->time_to_eat * 1000);
+	ft_usleep(phi->param->time_to_eat);
 	pthread_mutex_unlock(phi_nxt);
 	pthread_mutex_unlock(&phi->fork);
 	print_status(phi, SLEEP);
-	usleep(phi->param->time_to_sleep * 1000);
+	// usleep(phi->param->time_to_sleep * 1000);
+	ft_usleep(phi->param->time_to_sleep);
 	print_status(phi, THINK);
 	return(NULL);
 }
