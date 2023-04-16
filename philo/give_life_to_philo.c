@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 03:46:32 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/16 14:01:47 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/16 19:08:56 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	print_status(t_philo *p, char *status)
 			{
 				p->death = 1;
 				p->param->someone_is_dead = 1;
-				printf("time to die: %lu, demora pra comer: %lu\n", p->param->time_to_die, p->last_eat - get_time());
 				printf("\033[1;{%06lu\033[0;} - %i %s\n", time, p->phi_id, DIED);
 			}
 		else
