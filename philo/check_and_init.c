@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 02:01:02 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/16 08:59:24 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/17 01:19:38 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	init_param(t_param *p, int argc, char **argv)
 	p->philo = malloc(sizeof(t_philo) * p->num_philo);
 	if (p->philo == NULL)
 		return (ERROR);
+	if (pthread_mutex_init(&p->print_mtx, NULL))
+		return(ERROR);
 	return (SUCCESS);
 }
 
@@ -86,15 +88,9 @@ int	init_philo(t_param *p)
 		p->philo[i].phi_id = i + 1;
 		p->philo[i].phi_thread = 0;
 		p->philo[i].last_eat = 0;
-		p->philo[i].death = 0;
-		p->philo[i].num_eat = 0;
-		if (pthread_mutex_init(&p->philo[i].num_eat_mtx, NULL))
-			return (ERROR);
 		if (pthread_mutex_init(&p->philo[i].fork, NULL))
 			return (ERROR);
 		if (pthread_mutex_init(&p->philo[i].last_eat_mtx, NULL))
-			return (ERROR);
-		if (pthread_mutex_init(&p->philo[i].death_mtx, NULL))
 			return (ERROR);
 		p->philo[i].param = p;
 		i++;

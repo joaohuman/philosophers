@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 03:46:32 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/16 14:47:56 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/17 01:23:36 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ void	*test_philo(void *philo)
 	pthread_mutex_lock(&phi->last_eat_mtx);
 	phi->last_eat = get_time() - phi->param->init_time;
 	pthread_mutex_unlock(&phi->last_eat_mtx);
-	// usleep(phi->param->time_to_eat * 1000);
 	ft_usleep(phi->param->time_to_eat);
 	pthread_mutex_unlock(phi_nxt);
 	pthread_mutex_unlock(&phi->fork);
 	print_status(phi, SLEEP);
-	// usleep(phi->param->time_to_sleep * 1000);
 	ft_usleep(phi->param->time_to_sleep);
 	print_status(phi, THINK);
 	return(NULL);
@@ -58,7 +56,7 @@ void	*live_philo(void *philo)
 
 	phi = (t_philo *)philo;
 	if (phi->phi_id % 2 == 0)
-		usleep(1000);
+		usleep(1600);
 	while ((phi->num_eat < phi->param->how_much_eat || phi->param->how_much_eat == -1) && !phi->param->someone_is_dead)
 		test_philo(philo);
 	return (NULL);
@@ -68,9 +66,8 @@ void	print_status(t_philo *p, char *status)
 {
 	unsigned long		time;
 
-	pthread_mutex_lock(&p->num_eat_mtx);
+	pthread_mutex_lock(&p->param->print_mtx);
 	time = get_time() - p->param->init_time;
-	pthread_mutex_lock(&p->death_mtx);
 	if ((!ft_strncmp(status, EAT, 9) && !p->param->someone_is_dead) || !ft_strncmp(status, DIED, 9))
 	{
 		if ((p->param->time_to_die <= get_time() - p->last_eat - p->param->init_time && p->last_eat != 0) || !ft_strncmp(status, DIED, 9))
@@ -84,14 +81,8 @@ void	print_status(t_philo *p, char *status)
 	}
 	if (!p->param->someone_is_dead)
 		printf("\033[1;{%06lu\033[0;} - %i %s\n", time, p->phi_id, status);
-	pthread_mutex_unlock(&p->death_mtx);
-	pthread_mutex_unlock(&p->num_eat_mtx);
+	pthread_mutex_unlock(&p->param->print_mtx);
 }
-
-// void	monitoring_philo(t_param)
-// {
-	
-// }
 
 int	give_life_to_philo(t_param *p)
 {
@@ -110,7 +101,6 @@ int	give_life_to_philo(t_param *p)
 			return (printf("Error creating thread\n"), ERROR);
 		i++;
 	}
-	// monitoring_philo(%p);
 	i = 0;
 	while (i < p->num_philo)
 	{
