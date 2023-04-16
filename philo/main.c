@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 02:14:55 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/14 03:47:23 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/14 03:51:03 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	print_how_use(void)
 	printf("  [times_each_philosopher_must_eat] \t");
 	printf("number of times each philosopher must eat\n\n");
 }
-
-
 
 int	main(int argc, char **argv)
 {

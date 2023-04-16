@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:30:42 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/03/23 00:36:36 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/16 02:38:41 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,20 @@ long long	ft_atoi(const char *str)
 	if (*str)
 		return (-1);
 	return (num);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	int		i;
+
+	i = 0;
+	while (n--)
+	{
+		if (s1[i] != s2[i] || s1[i] == '\0' || s2[i] == '\0')
+		{
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		}
+		i++;
+	}
+	return (0);
 }

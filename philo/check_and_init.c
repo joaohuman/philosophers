@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 02:01:02 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/14 02:54:06 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/16 08:59:24 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	init_param(t_param *p, int argc, char **argv)
 	p->time_to_eat = ft_atoi(argv[3]);
 	p->time_to_sleep = ft_atoi(argv[4]);
 	p->init_time = get_time();
-	p->how_much_eat = 0;
+	p->how_much_eat = -1;
+	p->someone_is_dead = 0;
 	if (argc == 6)
 		p->how_much_eat = ft_atoi(argv[5]);
 	p->philo = malloc(sizeof(t_philo) * p->num_philo);
@@ -87,7 +88,13 @@ int	init_philo(t_param *p)
 		p->philo[i].last_eat = 0;
 		p->philo[i].death = 0;
 		p->philo[i].num_eat = 0;
+		if (pthread_mutex_init(&p->philo[i].num_eat_mtx, NULL))
+			return (ERROR);
 		if (pthread_mutex_init(&p->philo[i].fork, NULL))
+			return (ERROR);
+		if (pthread_mutex_init(&p->philo[i].last_eat_mtx, NULL))
+			return (ERROR);
+		if (pthread_mutex_init(&p->philo[i].death_mtx, NULL))
 			return (ERROR);
 		p->philo[i].param = p;
 		i++;
@@ -95,7 +102,7 @@ int	init_philo(t_param *p)
 	return (SUCCESS);
 }
 
-long long	get_time(void)
+unsigned long	get_time(void)
 {
 	struct timeval	time;
 

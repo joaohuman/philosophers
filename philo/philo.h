@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 23:58:02 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/14 03:47:48 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/16 08:58:46 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 
 # define ERROR 1
 # define SUCCESS 0
+# define FORK "has taken a fork"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define DIED "died"
 
 typedef struct s_philo	t_philo;
 typedef struct s_param	t_param;
@@ -29,36 +34,43 @@ struct s_philo
 {
 	int				phi_id;
 	pthread_t		phi_thread;
-	long long		last_eat;
+	unsigned long	last_eat;
+	pthread_mutex_t	last_eat_mtx;
 	int				death;
-	int				num_eat;
+	pthread_mutex_t	death_mtx;
 	pthread_mutex_t	fork;
 	int				i;
+	int				num_eat;
+	pthread_mutex_t	num_eat_mtx;
 	t_param			*param;
 };
 
 struct s_param
 {
-	long long	num_philo;
-	long long	time_to_die;
-	long long	time_to_eat;
-	long long	time_to_sleep;
-	long long	init_time;
-	long long	how_much_eat;
+	int				num_philo;
+	unsigned long	time_to_die;
+	unsigned long	time_to_eat;
+	unsigned long	time_to_sleep;
+	unsigned long	init_time;
+	long long		how_much_eat;
+	int				someone_is_dead;
 	t_philo		*philo;
 };
 
 long long	ft_atoi(const char *str);
 int			ft_isdigit(int c);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+
 void		print_how_use(void);
 int			check_args(int argc, char **argv);
 int			check_is_int(char **str);
 int			init_param(t_param *p, int argc, char **argv);
 int			init_philo(t_param *p);
-long long	get_time(void);
+unsigned long	get_time(void);
 
 void	*test_philo(void *philo);
 int	give_life_to_philo(t_param *p);
+void	print_status(t_philo *p, char *status);
 
 
 #endif
