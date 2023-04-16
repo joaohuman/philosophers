@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 03:46:32 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/16 10:13:28 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/16 14:01:47 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,14 @@ void	*test_philo(void *philo)
 {
 	pthread_mutex_t *phi_nxt;
 	t_philo 		*phi;
-	int				phi_nxt_id;
 	int				i;
 
 	phi = (t_philo *)philo;
 	i = phi->i;
 	if (i != phi->param->num_philo - 1)
-	{
 		phi_nxt = &phi->param->philo[i+1].fork;
-		phi_nxt_id = phi->param->philo[i+1].phi_id;
-	}
 	else
-	{
 		phi_nxt = &phi->param->philo[0].fork;
-		phi_nxt_id = phi->param->philo[0].phi_id;
-	}
 	pthread_mutex_lock(&phi->fork);
 	pthread_mutex_lock(phi_nxt);
 	print_status(phi, FORK);
@@ -68,10 +61,11 @@ void	print_status(t_philo *p, char *status)
 	pthread_mutex_lock(&p->death_mtx);
 	if ((!ft_strncmp(status, EAT, 9) && !p->param->someone_is_dead) || !ft_strncmp(status, DIED, 9))
 	{
-		if ((p->param->time_to_die <= p->last_eat - get_time() && p->last_eat != 0) || !ft_strncmp(status, DIED, 9))
+		if ((p->param->time_to_die <= get_time() - p->last_eat - p->param->init_time && p->last_eat != 0) || !ft_strncmp(status, DIED, 9))
 			{
 				p->death = 1;
 				p->param->someone_is_dead = 1;
+				printf("time to die: %lu, demora pra comer: %lu\n", p->param->time_to_die, p->last_eat - get_time());
 				printf("\033[1;{%06lu\033[0;} - %i %s\n", time, p->phi_id, DIED);
 			}
 		else
