@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 23:58:02 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/17 02:43:02 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/17 03:07:32 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int				init_param(t_param *p, int argc, char **argv);
 int				init_philo(t_param *p);
 unsigned long	get_time(void);
 
-void			*test_philo(void *philo);
 int				give_life_to_philo(t_param *p);
 void			print_status(t_philo *p, char *status);
 int				ft_usleep(unsigned long ms);
