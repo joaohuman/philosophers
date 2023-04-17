@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 23:58:02 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/17 01:17:18 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/17 02:43:02 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,23 @@ struct s_param
 	long long		how_much_eat;
 	int				someone_is_dead;
 	pthread_mutex_t	print_mtx;
-	t_philo		*philo;
+	t_philo			*philo;
 };
 
-long long	ft_atoi(const char *str);
-int			ft_isdigit(int c);
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
+long long		ft_atoi(const char *str);
+int				ft_isdigit(int c);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
 
-void		print_how_use(void);
-int			check_args(int argc, char **argv);
-int			check_is_int(char **str);
-int			init_param(t_param *p, int argc, char **argv);
-int			init_philo(t_param *p);
+void			print_how_use(void);
+int				check_args(int argc, char **argv);
+int				check_is_int(char **str);
+int				init_param(t_param *p, int argc, char **argv);
+int				init_philo(t_param *p);
 unsigned long	get_time(void);
 
-void	*test_philo(void *philo);
-int	give_life_to_philo(t_param *p);
-void	print_status(t_philo *p, char *status);
-
+void			*test_philo(void *philo);
+int				give_life_to_philo(t_param *p);
+void			print_status(t_philo *p, char *status);
+int				ft_usleep(unsigned long ms);
 
 #endif

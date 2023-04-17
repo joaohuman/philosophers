@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 00:30:42 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/16 02:38:41 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/17 02:43:26 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,15 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		}
 		i++;
 	}
+	return (0);
+}
+
+int	ft_usleep(unsigned long ms)
+{
+	unsigned long	start;
+
+	start = get_time();
+	while (ms > get_time() - start)
+		usleep(100);
 	return (0);
 }

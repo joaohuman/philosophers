@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 02:14:55 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/14 03:51:03 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/17 02:07:49 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ void	print_how_use(void)
 int	main(int argc, char **argv)
 {
 	t_param	p;
+
 	if (check_args(argc, argv))
 		return (ERROR);
 	if (init_param(&p, argc, argv))
-		return(printf("Error init_param"), ERROR);
+		return (printf("Error init_param"), ERROR);
 	if (init_philo(&p))
-		return(printf("Error init_philo"), ERROR);
+		return (printf("Error init_philo"), ERROR);
 	if (give_life_to_philo(&p))
-		return(printf("Error give_life_to_philo"), ERROR);
+		return (printf("Error give_life_to_philo"), ERROR);
 	return (SUCCESS);
 }

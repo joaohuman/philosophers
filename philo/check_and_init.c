@@ -6,7 +6,7 @@
 /*   By: jvictor- <jvictor-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 02:01:02 by jvictor-          #+#    #+#             */
-/*   Updated: 2023/04/17 01:19:38 by jvictor-         ###   ########.fr       */
+/*   Updated: 2023/04/17 02:05:26 by jvictor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	init_param(t_param *p, int argc, char **argv)
 	if (p->philo == NULL)
 		return (ERROR);
 	if (pthread_mutex_init(&p->print_mtx, NULL))
-		return(ERROR);
+		return (ERROR);
 	return (SUCCESS);
 }
 
